@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'position.dart';
 
+const kopencolor=Colors.blueGrey;
+const kclickcolor=Colors.greenAccent;
+const klastcolor=Colors.blue;
 
 void main() => runApp(MyApp());
 
@@ -11,12 +14,41 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  String a='';
-  int value1,value2,value3,value4,value5,value6,value7,value8,value9;
-  int count=0;
+  String a = '';
+  int value1, value2, value3, value4, value5, value6, value7, value8, value9;
+  int count = 0;
+  bool b = true;
+  int value = -1;
+  var arr = new List();
+  Color newcolour;
 
-  bool b=true;
-  position p=position();
+
+
+  position p = position();
+
+  Color updatecolor(int index,List arr,int count)
+  {
+
+    if(arr.contains(value1)==false && arr.contains(value2)==false && arr.contains(value3)==false && arr.contains(value4)==false && arr.contains(value5)==false && arr.contains(value6)==false && arr.contains(value7)==false && arr.contains(value8)==false && arr.contains(value9)==false &&value9==index || value1==index || value2==index || value3==index || value4==index || value5==index || value6==index || value7==index || value8==index )
+
+    {
+   return kclickcolor;
+    }
+    else if(arr.contains(index) )
+      {
+        for(var i=0;i<count;i++){
+          return klastcolor;
+
+        }
+
+      }
+
+    else
+    {
+       return kopencolor;
+      }
+  }
+
 
   Widget build(BuildContext context) {
     return  MaterialApp(
@@ -40,7 +72,8 @@ class _MyAppState extends State<MyApp> {
               ),
 
               child: RaisedButton(
-               // child: RaisedButton.icon(onPressed: null, icon: null, label: null),
+               //child: RaisedButton.icon(onPressed: null, icon: null, label: null),
+
 
 
                 onPressed: ()
@@ -58,7 +91,9 @@ class _MyAppState extends State<MyApp> {
                       value7 = p.check07(index);
                       value8 = p.check08(index);
                       value9=index;
-                      a='x';
+                      arr.add(value9);
+                      value9=-1;
+
                       count++;
                     }
 
@@ -72,26 +107,37 @@ class _MyAppState extends State<MyApp> {
                     value7 = p.check07(index);
                     value8 = p.check08(index);
                     value9=index;
-                    a='x';
+                    arr.add(value9);
                     count++;
+                    print(arr);
+                    print(count);
+                    b=false;
+                    a='X';
+
                     //index == -1;
                   }
+
 
 
 
                   });
 
                 },
-                child: Text(
-                     value9==index?'X':' '
-                ),
-                color: value9==index || value1==index || value2==index || value3==index || value4==index || value5==index || value6==index || value7==index || value8==index ?Colors.lightGreen : Colors.blueGrey,
 
+
+
+        //color: checkcolor(index),
+                color:  updatecolor(index,arr,count),// value9==index || value1==index || value2==index || value3==index || value4==index || value5==index || value6==index || value7==index || value8==index ?Colors.lightGreen : Colors.blueGrey,
+//                child: Text(
+//                  count.toString()
+//                ),
               ),
 
             );
           }),
         ),
+
+
       ),
     );
   }
