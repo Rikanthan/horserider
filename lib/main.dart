@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'position.dart';
+import 'method.dart';
 
 const kopencolor=Colors.blueGrey;
 const kclickcolor=Colors.greenAccent;
@@ -14,40 +15,84 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  String a = '';
+
   int value1, value2, value3, value4, value5, value6, value7, value8, value9;
   int count = 0;
-  bool b = true;
-  int value = -1;
+
   var arr = new List();
-  Color newcolour;
+  Color curcolor;
+  Color updatecolor(int index,List arr,int count)
+  {
+
+    if(arr.contains(index)==false && value9==index || arr.contains(value1)==false && value1==index || arr.contains(value2)==false && value2==index ||arr.contains(value3)==false && value3==index ||arr.contains(value3)==false && value4==index ||arr.contains(value5)==false && value5==index || arr.contains(value6)==false && value6==index || arr.contains(value7)==false && value7==index ||arr.contains(value8)==false&& value8==index )
+
+    {
+      return kclickcolor;
+    }
+    else if(arr.contains(index) )
+    {
+      for(var i=0;i<count;i++){
+        return klastcolor;
+      }
+
+    }
+
+    else
+    {
+      return kopencolor;
+    }
+  }
+
+
+
+
+
+
+  void check(int index)
+  {
+    if(count==0)
+    {
+      value1 = p.check01(index);
+      value2 = p.check02(index);
+      value3 = p.check03(index);
+      value4 = p.check04(index);
+      value5 = p.check05(index);
+      value6 = p.check06(index);
+      value7 = p.check07(index);
+      value8 = p.check08(index);
+      value9=index;
+      arr.add(value9);
+      value9=-1;
+
+      count++;
+    }
+
+    else if(count>0 && index==value1 || value2==index || value3==index || value4==index || value5==index || value6==index || value7==index || value8==index) {
+      value1 = p.check01(index);
+      value2 = p.check02(index);
+      value3 = p.check03(index);
+      value4 = p.check04(index);
+      value5 = p.check05(index);
+      value6 = p.check06(index);
+      value7 = p.check07(index);
+      value8 = p.check08(index);
+      value9=index;
+      arr.add(value9);
+      count++;
+      print(arr);
+      print(count);
+
+
+      //index == -1;
+    }
+  }
 
 
 
   position p = position();
+  color_method c=color_method();
 
-  Color updatecolor(int index,List arr,int count)
-  {
 
-    if(arr.contains(value1)==false && arr.contains(value2)==false && arr.contains(value3)==false && arr.contains(value4)==false && arr.contains(value5)==false && arr.contains(value6)==false && arr.contains(value7)==false && arr.contains(value8)==false && arr.contains(value9)==false &&value9==index || value1==index || value2==index || value3==index || value4==index || value5==index || value6==index || value7==index || value8==index )
-
-    {
-   return kclickcolor;
-    }
-    else if(arr.contains(index) )
-      {
-        for(var i=0;i<count;i++){
-          return klastcolor;
-
-        }
-
-      }
-
-    else
-    {
-       return kopencolor;
-      }
-  }
 
 
   Widget build(BuildContext context) {
@@ -80,42 +125,7 @@ class _MyAppState extends State<MyApp> {
                 {
 
                   setState(() {
-                  if(count==0)
-                    {
-                      value1 = p.check01(index);
-                      value2 = p.check02(index);
-                      value3 = p.check03(index);
-                      value4 = p.check04(index);
-                      value5 = p.check05(index);
-                      value6 = p.check06(index);
-                      value7 = p.check07(index);
-                      value8 = p.check08(index);
-                      value9=index;
-                      arr.add(value9);
-                      value9=-1;
-
-                      count++;
-                    }
-
-                  else if(count>0 && index==value1 || value2==index || value3==index || value4==index || value5==index || value6==index || value7==index || value8==index) {
-                    value1 = p.check01(index);
-                    value2 = p.check02(index);
-                    value3 = p.check03(index);
-                    value4 = p.check04(index);
-                    value5 = p.check05(index);
-                    value6 = p.check06(index);
-                    value7 = p.check07(index);
-                    value8 = p.check08(index);
-                    value9=index;
-                    arr.add(value9);
-                    count++;
-                    print(arr);
-                    print(count);
-                    b=false;
-                    a='X';
-
-                    //index == -1;
-                  }
+                  check(index);
 
 
 
