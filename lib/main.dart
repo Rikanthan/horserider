@@ -8,7 +8,7 @@ const kopencolor=Colors.blueGrey;
 const kclickcolor=Colors.greenAccent;
 const klastcolor=Colors.blue;
 
-void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(home: MyApp()));
 
 class MyApp extends StatefulWidget {
   @override
@@ -62,14 +62,7 @@ class _MyAppState extends State<MyApp> {
       //print(c);
       return kopencolor;
     }
-//    print(value1);
-//    print(value2);
-//    print(value3);
-//    print(value4);
-//    print(value5);
-//    print(value6);
-//    print(value7);
-//    print(value8);
+
 
 
   }
@@ -125,7 +118,7 @@ class _MyAppState extends State<MyApp> {
       if(arr.contains(value1)==true && arr.contains(value2)==true && arr.contains(value3)==true && arr.contains(value4)==true && arr.contains(value5)==true && arr.contains(value6)==true )//&& arr.contains(value7)==true && arr.contains(value8)==true  )
         {
           //gameover();
-          s=" game over";
+
         }
       print(arr);
       print(count);
@@ -138,7 +131,7 @@ class _MyAppState extends State<MyApp> {
 
   }
 
-  void gameovercheck(int  index,List arr)
+  void gameovercheck(int  index,List arr,int count)
   {
     int g1=f.possible01(index, arr);
     int g2=f.possible02(index, arr);
@@ -151,27 +144,73 @@ class _MyAppState extends State<MyApp> {
 
     if(g1==-1 && g2==-1 && g3==-1 &&  g4==-1 && g5==-1 && g6==-1 && g7==-1 && g8==-1)
       {
-    s=" Game over";
+        showAlertDialog(context);
 
       }
-   // s=" ";
-
+    else if(count==64)
+      {
+        showWonDialog(context);
+      }
 
   }
-
-
-
-
-
-
-
-
-
 
   position p = position();
   finish f=finish();
   color_method c=color_method();
 
+  showAlertDialog(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Game over"),
+      content: Text("You can't move anywhere"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showWonDialog(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert1 = AlertDialog(
+      title: Text("You won"),
+      content: Text("Your horse riding skill is well"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert1;
+      },
+    );
+  }
 
 
 
@@ -197,17 +236,17 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
 
-              child: RaisedButton(
+              child: MaterialButton(
 
                 onPressed: ()
                 {
 
                   setState(() {
                   check(index);
-
+                  gameovercheck(index, arr,count);
 
                     });
-                  gameovercheck(index, arr);
+
 
                   },
 
